@@ -543,7 +543,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
   /* ===== Typography ===== */
   .eyebrow {
     font-family: var(--font-sans);
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -825,24 +825,13 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     text-align: left;
   }
   
-  /* ===== Fade Up Animation ===== */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  
+  /* ===== Fade Up Animation =====
+     Disabled — was causing WAVE false-positive contrast errors
+     (WAVE reads JS-driven opacity changes as transparent text) */
+  .fade-up,
   .fade-up--visible {
     opacity: 1;
-    transform: translateY(0);
-  }
-  
-  @media (prefers-reduced-motion: reduce) {
-    .fade-up {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
+    transform: none;
   }
   
   /* ===== Services ===== */
