@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Blade -->
+  <path d="M8 38 L42 14 L46 18 L12 42 Z" fill="#C8A973"/>
+  <!-- Blade highlight -->
+  <path d="M10 39 L42 16 L43 17 L11 40 Z" fill="#E5CFA0" opacity="0.6"/>
+  <!-- Pivot -->
+  <circle cx="46" cy="20" r="2" fill="#0E0E0E"/>
+  <!-- Handle -->
+  <rect x="44" y="19" width="16" height="3" rx="1.5" fill="#0E0E0E" transform="rotate(35 46 20)"/>
+  <rect x="44" y="19" width="16" height="3" rx="1.5" fill="#2A2A2A" transform="rotate(35 46 20)" opacity="0.4"/>
+</svg>
