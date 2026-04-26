@@ -1,17 +1,1213 @@
 ---
+const title = "Ironside Barber Co. — A Sharper Standard";
+const description = "Modern men's grooming on Main Street in Littleton, NH. Precision cuts, classic shaves, no shortcuts. Book your appointment today.";
+const siteUrl = "https://ironsidebarber.co";
+const ogImage = "/og-ironside.jpg";
 
+const services = [
+  { name: "Signature Cut", description: "Precision haircut tailored to your style and hair type", price: "$45" },
+  { name: "The Executive", description: "Full service: cut, hot towel treatment, and beard shaping", price: "$75" },
+  { name: "Beard Sculpt", description: "Expert shaping, trimming, and conditioning", price: "$30" },
+  { name: "Straight Razor Shave", description: "Traditional hot lather shave with straight razor finish", price: "$55" },
+  { name: "Father & Son", description: "Haircuts for both—quality time in the chair", price: "$65" },
+  { name: "The Touch-Up", description: "Quick cleanup between full cuts", price: "$20" },
+  { name: "Kids' Cut", description: "For ages 12 and under", price: "$25" },
+];
+
+const barbers = [
+  {
+    name: "Marcus Cole",
+    role: "MASTER BARBER",
+    image: "/barber-marcus.jpg",
+    bio: "Owner and lead barber with over 15 years behind the chair. Marcus built his reputation on fades that last and conversations that matter. Trained in Boston, refined in Brooklyn, home in New Hampshire.",
+    bookName: "Marcus"
+  },
+  {
+    name: "Elena Vasquez",
+    role: "PRECISION SPECIALIST",
+    image: "/barber-elena.jpg",
+    bio: "Elena brings an artist's eye to every cut. Her background in tattoo culture means she understands line work like few others. Specializes in textured crops and modern classics.",
+    bookName: "Elena"
+  },
+  {
+    name: "DeShawn Mitchell",
+    role: "STRAIGHT RAZOR",
+    image: "/barber-deshawn.jpg",
+    bio: "Eight years in the Marine Corps taught DeShawn discipline. A decade in barbershops taught him the blade. His hot towel shaves are the reason clients drive an hour each way.",
+    bookName: "DeShawn"
+  }
+];
+
+const hours = [
+  { day: "Monday–Friday", time: "9am–7pm" },
+  { day: "Saturday", time: "8am–6pm" },
+  { day: "Sunday", time: "10am–4pm" },
+];
+
+const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting • Straight razor • Open 7 days • Book online";
 ---
 
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Demo 6</title>
-	</head>
-	<body>
-		<h1>Demo 6. </h1>
-	</body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={siteUrl} />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={siteUrl} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={siteUrl} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter+Tight:wght@400;500;600&display=optional" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter+Tight:wght@400;500;600&display=optional" />
+</head>
+<body>
+  <!-- Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <!-- Header -->
+  <header class="header" id="header">
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/" class="logo" aria-label="Ironside Barber Co. Home">
+        <span class="logo-main">IRONSIDE</span>
+        <span class="logo-sub">BARBER CO.</span>
+      </a>
+      
+      <ul class="nav-links" role="list">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+      
+      <a href="#book" class="btn btn-outline">Book Now</a>
+    </nav>
+  </header>
+  
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-bg">
+        <img 
+          src="/hero-barbershop.jpg" 
+          alt="Interior of Ironside Barber Co. featuring vintage leather chairs and warm ambient lighting" 
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div class="hero-overlay" aria-hidden="true"></div>
+      </div>
+      
+      <div class="hero-content">
+        <p class="eyebrow">Est. 2024 — Littleton, NH</p>
+        <h1 id="hero-heading" class="hero-headline">A Sharper Standard.</h1>
+        <p class="hero-subhead">Modern men's grooming on Main Street. Precision cuts, classic shaves, no shortcuts.</p>
+        
+        <div class="hero-ctas">
+          <a href="#book" class="btn btn-primary">Book an Appointment</a>
+          <a href="#services" class="btn btn-text">
+            View Services
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        {[...Array(4)].map(() => (
+          <span class="marquee-content">
+            {marqueeText} •&nbsp;
+          </span>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Services -->
+    <section class="section" id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <header class="section-header section-header--left">
+          <p class="eyebrow">Services & Pricing</p>
+          <h2 id="services-heading" class="section-title fade-up">The Menu</h2>
+        </header>
+        
+        <ul class="services-list" role="list">
+          {services.map((service) => (
+            <li class="service-item">
+              <div class="service-info">
+                <h3 class="service-name">{service.name}</h3>
+                <p class="service-desc">{service.description}</p>
+              </div>
+              <span class="service-line" aria-hidden="true"></span>
+              <span class="service-price">{service.price}</span>
+            </li>
+          ))}
+        </ul>
+        
+        <p class="services-note">
+          We ask for 24 hours notice for cancellations. Late arrivals may result in a shortened service or rescheduling.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Team -->
+    <section class="section section--surface" id="team" aria-labelledby="team-heading">
+      <div class="container">
+        <header class="section-header">
+          <p class="eyebrow">Behind the Chair</p>
+          <h2 id="team-heading" class="section-title fade-up">The Barbers</h2>
+        </header>
+        
+        <div class="barbers-grid">
+          {barbers.map((barber) => (
+            <article class="barber-card">
+              <div class="barber-image">
+                <img 
+                  src={barber.image} 
+                  alt={`Portrait of ${barber.name}, ${barber.role.toLowerCase()} at Ironside Barber Co.`}
+                  loading="lazy"
+                />
+              </div>
+              <h3 class="barber-name">{barber.name}</h3>
+              <p class="barber-role">{barber.role}</p>
+              <p class="barber-bio">{barber.bio}</p>
+              <a href="#book" class="barber-book">Book with {barber.bookName}</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <!-- Gallery -->
+    <section class="section" id="gallery" aria-labelledby="gallery-heading">
+      <div class="container">
+        <header class="section-header">
+          <p class="eyebrow">Our Work</p>
+          <h2 id="gallery-heading" class="section-title fade-up">The Work</h2>
+        </header>
+        
+        <div class="gallery-grid">
+          <div class="gallery-item gallery-item--large">
+            <img src="/work-1.jpg" alt="Precision fade haircut showcasing clean lines and expert blending" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="/work-2.jpg" alt="Client receiving a traditional hot towel straight razor shave" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="/work-3.jpg" alt="Expertly sculpted beard with sharp defined edges" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="/work-4.jpg" alt="Barber performing a precision clipper fade technique" loading="lazy" />
+          </div>
+          <div class="gallery-item gallery-item--wide">
+            <img src="/work-5.jpg" alt="Textured crop haircut with clean neckline from behind" loading="lazy" />
+          </div>
+          <div class="gallery-item">
+            <img src="/work-6.jpg" alt="Wide view of Ironside Barber Co. interior during a haircut session" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- About -->
+    <section class="section section--surface" id="about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image">
+            <img 
+              src="/shop-interior.jpg" 
+              alt="Ironside Barber Co. interior featuring vintage leather chair and premium grooming products" 
+              loading="lazy"
+            />
+          </div>
+          
+          <div class="about-content">
+            <h2 id="about-heading" class="section-title fade-up">Built for the cut, not the trend.</h2>
+            
+            <div class="about-text">
+              <p>
+                We opened on Main Street in Littleton because we believe small towns deserve sharp work. 
+                This isn't a chain, and it isn't a franchise. It's three barbers who care about craft 
+                more than volume.
+              </p>
+              <p>
+                Every barber here trained in classic technique before picking up their first pair of 
+                clippers. We don't rush appointments. We don't cut corners. We believe a great haircut 
+                is a conversation between barber and client—and good conversations take time.
+              </p>
+              <p>
+                Walk-ins are always welcome, but we recommend booking ahead. Not because we're precious 
+                about it, but because we want to give you the time you deserve.
+              </p>
+            </div>
+            
+            <blockquote class="about-quote">
+              <p>"The best haircut isn't the one that looks good today. It's the one that grows out right."</p>
+              <cite>— Marcus Cole, Founder</cite>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Visit -->
+    <section class="section" id="visit" aria-labelledby="visit-heading">
+      <div class="container">
+        <header class="section-header">
+          <p class="eyebrow">Location & Hours</p>
+          <h2 id="visit-heading" class="section-title fade-up">Find Us</h2>
+        </header>
+        
+        <div class="visit-grid">
+          <div class="visit-info">
+            <address class="visit-address">
+              <p class="visit-street">87 Main Street</p>
+              <p>Littleton, NH 03561</p>
+            </address>
+            
+            <div class="visit-contact">
+              <a href="tel:+16034441234" class="visit-link">(603) 444-1234</a>
+              <a href="mailto:hello@ironsidebarber.co" class="visit-link">hello@ironsidebarber.co</a>
+            </div>
+            
+            <dl class="visit-hours">
+              {hours.map((item) => (
+                <div class="hours-row">
+                  <dt>{item.day}</dt>
+                  <dd>{item.time}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          
+          <div class="visit-map">
+            <!-- Replace this div with your Google Maps embed iframe -->
+            <!-- Example: <iframe src="https://www.google.com/maps/embed?..." ...></iframe> -->
+            <div class="map-placeholder" aria-label="Map showing location of Ironside Barber Co. at 87 Main Street, Littleton, NH">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" fill="currentColor"/>
+              </svg>
+              <p>Map embed goes here</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="visit-cta" id="book">
+          <a href="https://booking.ironsidebarber.co" class="btn btn-primary btn-large">Book Your Appointment</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="logo" aria-label="Ironside Barber Co. Home">
+            <span class="logo-main">IRONSIDE</span>
+            <span class="logo-sub">BARBER CO.</span>
+          </a>
+          <p class="footer-tagline">Main Street, Littleton NH</p>
+        </div>
+        
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <ul role="list">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#visit">Visit</a></li>
+            <li><a href="#book">Book</a></li>
+          </ul>
+        </nav>
+        
+        <div class="footer-social">
+          <a href="https://instagram.com/ironsidebarberco" aria-label="Follow us on Instagram" class="social-link">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="18" cy="6" r="1" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="https://facebook.com/ironsidebarberco" aria-label="Follow us on Facebook" class="social-link">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="https://g.page/ironsidebarberco" aria-label="Find us on Google" class="social-link">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="currentColor"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; {new Date().getFullYear()} Ironside Barber Co. All rights reserved.</p>
+        <p class="footer-credit">Site by <a href="https://jakefixestech.com" target="_blank" rel="noopener noreferrer">Jake Fixes Tech</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // @ts-nocheck
+    // Sticky header on scroll
+    const header = document.getElementById('header');
+    let lastScroll = 0;
+    
+    function handleScroll() {
+      const currentScroll = window.scrollY;
+      
+      if (currentScroll > 100) {
+        header.classList.add('header--solid');
+      } else {
+        header.classList.remove('header--solid');
+      }
+      
+      lastScroll = currentScroll;
+    }
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Fade-up animation on scroll
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (!prefersReducedMotion) {
+      const fadeElements = document.querySelectorAll('.fade-up');
+      
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('fade-up--visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      );
+      
+      fadeElements.forEach((el) => observer.observe(el));
+    } else {
+      // If reduced motion, just show all elements
+      document.querySelectorAll('.fade-up').forEach((el) => {
+        el.classList.add('fade-up--visible');
+      });
+    }
+  </script>
+</body>
 </html>
+
+<style>
+  /* ===== CSS Custom Properties ===== */
+  :root {
+    /* Colors */
+    --color-bg: #0E0E0E;
+    --color-surface: #161616;
+    --color-border: #2A2A2A;
+    --color-text-primary: #F5F1EA;
+    --color-text-secondary: #9A958B;
+    --color-accent: #C8A973;
+    
+    /* Typography */
+    --font-serif: 'Fraunces', Georgia, serif;
+    --font-sans: 'Inter Tight', system-ui, -apple-system, sans-serif;
+    
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-2xl: 5rem;
+    --space-3xl: 8rem;
+    
+    /* Layout */
+    --container-max: 1200px;
+    --header-height: 5rem;
+    
+    /* Transitions */
+    --transition: 0.3s ease;
+  }
+  
+  /* ===== Reset & Base ===== */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-height);
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    transition: color var(--transition);
+  }
+  
+  a:hover {
+    color: var(--color-accent);
+  }
+  
+  a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  
+  ul[role="list"] {
+    list-style: none;
+  }
+  
+  /* ===== Skip Link ===== */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: var(--space-sm);
+    z-index: 1000;
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--color-accent);
+    color: var(--color-bg);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  
+  .skip-link:focus {
+    top: var(--space-sm);
+  }
+  
+  /* ===== Container ===== */
+  .container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--space-md);
+  }
+  
+  /* ===== Typography ===== */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  
+  /* ===== Buttons ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: 0.875rem 1.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all var(--transition);
+    cursor: pointer;
+    border: none;
+  }
+  
+  .btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  
+  .btn-primary {
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+  
+  .btn-primary:hover {
+    background: #D4B988;
+    color: var(--color-bg);
+  }
+  
+  .btn-outline {
+    background: transparent;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+  }
+  
+  .btn-outline:hover {
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+  
+  .btn-text {
+    padding: 0;
+    background: transparent;
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+  
+  .btn-text:hover {
+    color: var(--color-accent);
+  }
+  
+  .btn-large {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+  }
+  
+  /* ===== Header ===== */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--header-height);
+    background: transparent;
+    transition: background var(--transition), border-color var(--transition);
+    border-bottom: 1px solid transparent;
+  }
+  
+  .header--solid {
+    background: rgba(14, 14, 14, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom-color: var(--color-border);
+  }
+  
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--space-md);
+  }
+  
+  .logo {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    line-height: 1.1;
+  }
+  
+  .logo:hover {
+    color: var(--color-text-primary);
+  }
+  
+  .logo-main {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  
+  .logo-sub {
+    font-family: var(--font-sans);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+  }
+  
+  .nav-links {
+    display: none;
+    gap: var(--space-lg);
+  }
+  
+  @media (min-width: 768px) {
+    .nav-links {
+      display: flex;
+    }
+  }
+  
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    transition: color var(--transition);
+  }
+  
+  .nav-links a:hover {
+    color: var(--color-text-primary);
+  }
+  
+  .nav .btn-outline {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8125rem;
+  }
+  
+  /* ===== Hero ===== */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--space-3xl) var(--space-md) var(--space-2xl);
+  }
+  
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+  
+  .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(14, 14, 14, 0.4) 0%,
+      rgba(14, 14, 14, 0.85) 100%
+    );
+  }
+  
+  .hero-content {
+    max-width: 800px;
+  }
+  
+  .hero-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: var(--space-md);
+  }
+  
+  .hero-subhead {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    max-width: 50ch;
+    margin-bottom: var(--space-lg);
+  }
+  
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  
+  /* ===== Marquee ===== */
+  .marquee {
+    background: var(--color-surface);
+    padding: var(--space-sm) 0;
+    overflow: hidden;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+  
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  
+  .marquee-content {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+    padding-right: var(--space-lg);
+  }
+  
+  @keyframes marquee {
+    to {
+      transform: translateX(-25%);
+    }
+  }
+  
+  /* ===== Sections ===== */
+  .section {
+    padding: var(--space-3xl) 0;
+    scroll-margin-top: var(--header-height);
+  }
+  
+  .section--surface {
+    background: var(--color-surface);
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+  
+  .section-header--left {
+    text-align: left;
+  }
+  
+  /* ===== Fade Up Animation ===== */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .fade-up--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+  
+  /* ===== Services ===== */
+  .services-list {
+    max-width: 800px;
+    margin-bottom: var(--space-xl);
+  }
+  
+  .service-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: baseline;
+    gap: var(--space-sm);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .service-info {
+    min-width: 0;
+  }
+  
+  .service-name {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+  }
+  
+  .service-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+  
+  .service-line {
+    flex: 1;
+    min-width: 40px;
+    border-bottom: 1px dotted var(--color-border);
+    align-self: center;
+    display: none;
+  }
+  
+  @media (min-width: 600px) {
+    .service-line {
+      display: block;
+    }
+  }
+  
+  .service-price {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  
+  .services-note {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    max-width: 500px;
+  }
+  
+  /* ===== Barbers ===== */
+  .barbers-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+  
+  @media (min-width: 600px) {
+    .barbers-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 900px) {
+    .barbers-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  .barber-card {
+    text-align: center;
+  }
+  
+  .barber-image {
+    aspect-ratio: 1;
+    margin-bottom: var(--space-md);
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+  
+  .barber-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition), filter var(--transition);
+  }
+  
+  .barber-card:hover .barber-image img {
+    transform: scale(1.03);
+    filter: brightness(1.05);
+  }
+  
+  .barber-name {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+  }
+  
+  .barber-role {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .barber-bio {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+  
+  .barber-book {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+  
+  /* ===== Gallery ===== */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+  
+  @media (min-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 200px);
+    }
+    
+    .gallery-item--large {
+      grid-column: 1;
+      grid-row: 1 / 3;
+    }
+    
+    .gallery-item--wide {
+      grid-column: 2 / 4;
+    }
+  }
+  
+  .gallery-item {
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+  
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition), filter var(--transition);
+  }
+  
+  .gallery-item:hover img {
+    transform: scale(1.03);
+    filter: brightness(1.1);
+  }
+  
+  /* ===== About ===== */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  
+  @media (min-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr 1.2fr;
+    }
+  }
+  
+  .about-image {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+  
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .about-content .section-title {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .about-text {
+    margin-bottom: var(--space-xl);
+  }
+  
+  .about-text p {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+  }
+  
+  .about-text p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .about-quote {
+    padding-left: var(--space-lg);
+    border-left: 2px solid var(--color-accent);
+  }
+  
+  .about-quote p {
+    font-family: var(--font-serif);
+    font-size: 1.375rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.4;
+    margin-bottom: var(--space-sm);
+  }
+  
+  .about-quote cite {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-style: normal;
+    color: var(--color-text-secondary);
+  }
+  
+  /* ===== Visit ===== */
+  .visit-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+  }
+  
+  @media (min-width: 768px) {
+    .visit-grid {
+      grid-template-columns: 1fr 1.5fr;
+    }
+  }
+  
+  .visit-address {
+    font-style: normal;
+    margin-bottom: var(--space-md);
+  }
+  
+  .visit-street {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .visit-contact {
+    margin-bottom: var(--space-lg);
+  }
+  
+  .visit-link {
+    display: block;
+    font-size: 0.9375rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .visit-hours {
+    display: grid;
+    gap: var(--space-xs);
+  }
+  
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-md);
+    font-size: 0.9375rem;
+  }
+  
+  .hours-row dt {
+    color: var(--color-text-secondary);
+  }
+  
+  .hours-row dd {
+    font-weight: 500;
+  }
+  
+  .visit-map {
+    min-height: 300px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+  }
+  
+  .map-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 300px;
+    color: var(--color-text-secondary);
+    gap: var(--space-sm);
+  }
+  
+  .visit-cta {
+    text-align: center;
+    scroll-margin-top: var(--header-height);
+  }
+  
+  /* ===== Footer ===== */
+  .footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-2xl) 0 var(--space-lg);
+  }
+  
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+  
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr auto auto;
+      align-items: start;
+    }
+  }
+  
+  .footer-tagline {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-top: var(--space-sm);
+  }
+  
+  .footer-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-lg);
+  }
+  
+  .footer-nav a {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+  
+  .footer-social {
+    display: flex;
+    gap: var(--space-md);
+  }
+  
+  .social-link {
+    color: var(--color-text-secondary);
+    transition: color var(--transition);
+    text-decoration: none;
+  }
+  
+  .social-link:hover {
+    color: var(--color-accent);
+  }
+  
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+  }
+  
+  .footer-credit a {
+    color: var(--color-text-secondary);
+  }
+  
+  .footer-credit a:hover {
+    color: var(--color-accent);
+  }
+</style>
