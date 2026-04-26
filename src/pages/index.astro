@@ -270,7 +270,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     <!-- Visit -->
     <section class="section" id="visit" aria-labelledby="visit-heading">
       <div class="container">
-        <header class="section-header">
+        <header class="section-header" id="book">
           <p class="eyebrow">Location & Hours</p>
           <h2 id="visit-heading" class="section-title fade-up">Find Us</h2>
         </header>
@@ -309,8 +309,8 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
           </div>
         </div>
         
-        <div class="visit-cta" id="book">
-          <a href="https://booking.ironsidebarber.co" class="btn btn-primary btn-large">Book Your Appointment</a>
+        <div class="visit-cta">
+          <a href="#visit" class="btn btn-primary btn-large">Book Your Appointment</a>
         </div>
       </div>
     </section>
@@ -368,17 +368,27 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
 
   <script>
     // @ts-nocheck
-    // Sticky header on scroll
+    // Hide-on-scroll-down, show-on-scroll-up navbar
     const header = document.getElementById('header');
     let lastScroll = 0;
     
     function handleScroll() {
       const currentScroll = window.scrollY;
       
-      if (currentScroll > 100) {
-        header.classList.add('header--solid');
-      } else {
-        header.classList.remove('header--solid');
+      // Always show at top of page
+      if (currentScroll <= 50) {
+        header.classList.remove('header--hidden');
+        lastScroll = currentScroll;
+        return;
+      }
+      
+      // Scrolling down past threshold — hide
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        header.classList.add('header--hidden');
+      } 
+      // Scrolling up — show
+      else if (currentScroll < lastScroll) {
+        header.classList.remove('header--hidden');
       }
       
       lastScroll = currentScroll;
@@ -616,15 +626,21 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     right: 0;
     z-index: 100;
     height: var(--header-height);
-    background: transparent;
-    transition: background var(--transition), border-color var(--transition);
-    border-bottom: 1px solid transparent;
+    background: rgba(14, 14, 14, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    transition: transform var(--transition);
   }
   
-  .header--solid {
-    background: rgba(14, 14, 14, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom-color: var(--color-border);
+  .header--hidden {
+    transform: translateY(-100%);
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .header {
+      transition: none;
+    }
   }
   
   .nav {
@@ -802,6 +818,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
   .section-header {
     text-align: center;
     margin-bottom: var(--space-2xl);
+    scroll-margin-top: var(--header-height);
   }
   
   .section-header--left {
@@ -1136,7 +1153,6 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
   
   .visit-cta {
     text-align: center;
-    scroll-margin-top: var(--header-height);
   }
   
   /* ===== Footer ===== */
