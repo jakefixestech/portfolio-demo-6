@@ -55,34 +55,43 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={siteUrl} />
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  
+
+  <!-- LCP OPTIMIZATION: preload the hero image so the browser fetches it before discovering it in the body.
+       Combined with fetchpriority="high" on the <img>, this fixes "Network dependency tree" + LCP request discovery. -->
+  <link rel="preload" as="image" href="/hero-barbershop.webp" fetchpriority="high" />
+
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content={siteUrl} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={`${siteUrl}${ogImage}`} />
-  
+
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content={siteUrl} />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
-  
-  <!-- Fonts -->
+
+  <!-- Fonts: non-blocking load pattern.
+       The print/onload swap lets the browser skip waiting on the stylesheet for first paint,
+       then upgrades to the real font once it's loaded. <noscript> covers JS-disabled users. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter+Tight:wght@400;500;600&display=optional" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter+Tight:wght@400;500;600&display=optional" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter+Tight:wght@400;500;600&display=optional" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Inter+Tight:wght@400;500;600&display=swap" />
+  </noscript>
 </head>
 <body>
   <!-- Skip Link -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <!-- Header -->
   <header class="header" id="header">
     <nav class="nav" aria-label="Main navigation">
@@ -90,36 +99,36 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
         <span class="logo-main">IRONSIDE</span>
         <span class="logo-sub">BARBER CO.</span>
       </a>
-      
+
       <ul class="nav-links" role="list">
         <li><a href="#services">Services</a></li>
         <li><a href="#team">Team</a></li>
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#visit">Visit</a></li>
       </ul>
-      
+
       <a href="#book" class="btn btn-outline">Book Now</a>
     </nav>
   </header>
-  
+
   <main id="main-content">
     <!-- Hero -->
     <section class="hero" aria-labelledby="hero-heading">
       <div class="hero-bg">
-        <img 
-          src="/hero-barbershop.webp" 
-          alt="Interior of Ironside Barber Co. featuring vintage leather chairs and warm ambient lighting" 
+        <img
+          src="/hero-barbershop.webp"
+          alt="Interior of Ironside Barber Co. featuring vintage leather chairs and warm ambient lighting"
           loading="eager"
           fetchpriority="high"
         />
         <div class="hero-overlay" aria-hidden="true"></div>
       </div>
-      
+
       <div class="hero-content">
         <p class="eyebrow">Est. 2024 — Littleton, NH</p>
         <h1 id="hero-heading" class="hero-headline">A Sharper Standard.</h1>
         <p class="hero-subhead">Modern men's grooming on Main Street. Precision cuts, classic shaves, no shortcuts.</p>
-        
+
         <div class="hero-ctas">
           <a href="#book" class="btn btn-primary">Book an Appointment</a>
           <a href="#services" class="btn btn-text">
@@ -131,7 +140,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
         </div>
       </div>
     </section>
-    
+
     <!-- Marquee -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
@@ -142,7 +151,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
         ))}
       </div>
     </div>
-    
+
     <!-- Services -->
     <section class="section" id="services" aria-labelledby="services-heading">
       <div class="container">
@@ -150,7 +159,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
           <p class="eyebrow">Services & Pricing</p>
           <h2 id="services-heading" class="section-title fade-up">The Menu</h2>
         </header>
-        
+
         <ul class="services-list" role="list">
           {services.map((service) => (
             <li class="service-item">
@@ -163,13 +172,13 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
             </li>
           ))}
         </ul>
-        
+
         <p class="services-note">
           We ask for 24 hours notice for cancellations. Late arrivals may result in a shortened service or rescheduling.
         </p>
       </div>
     </section>
-    
+
     <!-- Team -->
     <section class="section section--surface" id="team" aria-labelledby="team-heading">
       <div class="container">
@@ -177,13 +186,13 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
           <p class="eyebrow">Behind the Chair</p>
           <h2 id="team-heading" class="section-title fade-up">The Barbers</h2>
         </header>
-        
+
         <div class="barbers-grid">
           {barbers.map((barber) => (
             <article class="barber-card">
               <div class="barber-image">
-                <img 
-                  src={barber.image} 
+                <img
+                  src={barber.image}
                   alt={`Portrait of ${barber.name}, ${barber.role.toLowerCase()} at Ironside Barber Co.`}
                   loading="lazy"
                 />
@@ -197,7 +206,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
         </div>
       </div>
     </section>
-    
+
     <!-- Gallery -->
     <section class="section" id="gallery" aria-labelledby="gallery-heading">
       <div class="container">
@@ -205,7 +214,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
           <p class="eyebrow">Our Work</p>
           <h2 id="gallery-heading" class="section-title fade-up">The Work</h2>
         </header>
-        
+
         <div class="gallery-grid">
           <div class="gallery-item gallery-item--large">
             <img src="/work-1.jpg" alt="Precision fade haircut showcasing clean lines and expert blending" loading="lazy" />
@@ -228,39 +237,39 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
         </div>
       </div>
     </section>
-    
+
     <!-- About -->
     <section class="section section--surface" id="about" aria-labelledby="about-heading">
       <div class="container">
         <div class="about-grid">
           <div class="about-image">
-            <img 
-              src="/shop-interior.jpg" 
-              alt="Ironside Barber Co. interior featuring vintage leather chair and premium grooming products" 
+            <img
+              src="/shop-interior.jpg"
+              alt="Ironside Barber Co. interior featuring vintage leather chair and premium grooming products"
               loading="lazy"
             />
           </div>
-          
+
           <div class="about-content">
             <h2 id="about-heading" class="section-title fade-up">Built for the cut, not the trend.</h2>
-            
+
             <div class="about-text">
               <p>
-                We opened on Main Street in Littleton because we believe small towns deserve sharp work. 
-                This isn't a chain, and it isn't a franchise. It's three barbers who care about craft 
+                We opened on Main Street in Littleton because we believe small towns deserve sharp work.
+                This isn't a chain, and it isn't a franchise. It's three barbers who care about craft
                 more than volume.
               </p>
               <p>
-                Every barber here trained in classic technique before picking up their first pair of 
-                clippers. We don't rush appointments. We don't cut corners. We believe a great haircut 
+                Every barber here trained in classic technique before picking up their first pair of
+                clippers. We don't rush appointments. We don't cut corners. We believe a great haircut
                 is a conversation between barber and client—and good conversations take time.
               </p>
               <p>
-                Walk-ins are always welcome, but we recommend booking ahead. Not because we're precious 
+                Walk-ins are always welcome, but we recommend booking ahead. Not because we're precious
                 about it, but because we want to give you the time you deserve.
               </p>
             </div>
-            
+
             <blockquote class="about-quote">
               <p>"The best haircut isn't the one that looks good today. It's the one that grows out right."</p>
               <cite>— Marcus Cole, Founder</cite>
@@ -269,7 +278,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
         </div>
       </div>
     </section>
-    
+
     <!-- Visit -->
     <section class="section" id="visit" aria-labelledby="visit-heading">
       <div class="container">
@@ -277,19 +286,19 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
           <p class="eyebrow">Location & Hours</p>
           <h2 id="visit-heading" class="section-title fade-up">Find Us</h2>
         </header>
-        
+
         <div class="visit-grid">
           <div class="visit-info">
             <address class="visit-address">
               <p class="visit-street">87 Main Street</p>
               <p>Littleton, NH 03561</p>
             </address>
-            
+
             <div class="visit-contact">
               <a href="tel:+16034441234" class="visit-link">(603) 444-1234</a>
               <a href="mailto:hello@ironsidebarber.co" class="visit-link">hello@ironsidebarber.co</a>
             </div>
-            
+
             <dl class="visit-hours">
               {hours.map((item) => (
                 <div class="hours-row">
@@ -299,7 +308,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
               ))}
             </dl>
           </div>
-          
+
           <div class="visit-map">
             <!-- Replace this div with your Google Maps embed iframe -->
             <!-- Example: <iframe src="https://www.google.com/maps/embed?..." ...></iframe> -->
@@ -311,14 +320,14 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
             </div>
           </div>
         </div>
-        
+
         <div class="visit-cta">
           <a href="#visit" class="btn btn-primary btn-large">Book Your Appointment</a>
         </div>
       </div>
     </section>
   </main>
-  
+
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -330,7 +339,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
           </a>
           <p class="footer-tagline">Main Street, Littleton NH</p>
         </div>
-        
+
         <nav class="footer-nav" aria-label="Footer navigation">
           <ul role="list">
             <li><a href="#services">Services</a></li>
@@ -340,7 +349,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
             <li><a href="#book">Book</a></li>
           </ul>
         </nav>
-        
+
         <div class="footer-social">
           <a href="https://instagram.com/ironsidebarberco" aria-label="Follow us on Instagram" class="social-link">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -361,7 +370,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
           </a>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
         <p>&copy; {new Date().getFullYear()} Ironside Barber Co. All rights reserved.</p>
         <p class="footer-credit">Site by <a href="https://jakefixestech.com" target="_blank" rel="noopener noreferrer">Jake Fixes Tech</a></p>
@@ -374,37 +383,37 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     // Hide-on-scroll-down, show-on-scroll-up navbar
     const header = document.getElementById('header');
     let lastScroll = 0;
-    
+
     function handleScroll() {
       const currentScroll = window.scrollY;
-      
+
       // Always show at top of page
       if (currentScroll <= 50) {
         header.classList.remove('header--hidden');
         lastScroll = currentScroll;
         return;
       }
-      
+
       // Scrolling down past threshold — hide
       if (currentScroll > lastScroll && currentScroll > 100) {
         header.classList.add('header--hidden');
-      } 
+      }
       // Scrolling up — show
       else if (currentScroll < lastScroll) {
         header.classList.remove('header--hidden');
       }
-      
+
       lastScroll = currentScroll;
     }
-    
+
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
+
     // Fade-up animation on scroll
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
+
     if (!prefersReducedMotion) {
       const fadeElements = document.querySelectorAll('.fade-up');
-      
+
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -416,7 +425,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
         },
         { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
       );
-      
+
       fadeElements.forEach((el) => observer.observe(el));
     } else {
       // If reduced motion, just show all elements
@@ -438,11 +447,11 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     --color-text-primary: #F5F1EA;
     --color-text-secondary: #9A958B;
     --color-accent: #C8A973;
-    
+
     /* Typography */
     --font-serif: 'Fraunces', Georgia, serif;
     --font-sans: 'Inter Tight', system-ui, -apple-system, sans-serif;
-    
+
     /* Spacing */
     --space-xs: 0.5rem;
     --space-sm: 1rem;
@@ -451,15 +460,15 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     --space-xl: 3rem;
     --space-2xl: 5rem;
     --space-3xl: 8rem;
-    
+
     /* Layout */
     --container-max: 1200px;
     --header-height: 5rem;
-    
+
     /* Transitions */
     --transition: 0.3s ease;
   }
-  
+
   /* ===== Reset & Base ===== */
   *,
   *::before,
@@ -468,18 +477,18 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     margin: 0;
     padding: 0;
   }
-  
+
   html {
     scroll-behavior: smooth;
     scroll-padding-top: var(--header-height);
   }
-  
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
     }
   }
-  
+
   body {
     font-family: var(--font-sans);
     font-size: 1rem;
@@ -490,33 +499,33 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   img {
     display: block;
     max-width: 100%;
     height: auto;
   }
-  
+
   a {
     color: inherit;
     text-decoration: underline;
     text-underline-offset: 0.15em;
     transition: color var(--transition);
   }
-  
+
   a:hover {
     color: var(--color-accent);
   }
-  
+
   a:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
-  
+
   ul[role="list"] {
     list-style: none;
   }
-  
+
   /* ===== Skip Link ===== */
   .skip-link {
     position: absolute;
@@ -530,11 +539,11 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     text-decoration: none;
     border-radius: 4px;
   }
-  
+
   .skip-link:focus {
     top: var(--space-sm);
   }
-  
+
   /* ===== Container ===== */
   .container {
     width: 100%;
@@ -542,7 +551,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     margin-inline: auto;
     padding-inline: var(--space-md);
   }
-  
+
   /* ===== Typography ===== */
   .eyebrow {
     font-family: var(--font-sans);
@@ -553,7 +562,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     color: var(--color-text-secondary);
     margin-bottom: var(--space-sm);
   }
-  
+
   .section-title {
     font-family: var(--font-serif);
     font-size: clamp(2rem, 5vw, 3.5rem);
@@ -561,7 +570,7 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     letter-spacing: -0.02em;
     line-height: 1.1;
   }
-  
+
   /* ===== Buttons ===== */
   .btn {
     display: inline-flex;
@@ -577,33 +586,33 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     cursor: pointer;
     border: none;
   }
-  
+
   .btn:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
-  
+
   .btn-primary {
     background: var(--color-accent);
     color: var(--color-bg);
   }
-  
+
   .btn-primary:hover {
     background: #D4B988;
     color: var(--color-bg);
   }
-  
+
   .btn-outline {
     background: transparent;
     color: var(--color-accent);
     border: 1px solid var(--color-accent);
   }
-  
+
   .btn-outline:hover {
     background: var(--color-accent);
     color: var(--color-bg);
   }
-  
+
   .btn-text {
     padding: 0;
     background: transparent;
@@ -611,16 +620,16 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     text-decoration: underline;
     text-underline-offset: 0.25em;
   }
-  
+
   .btn-text:hover {
     color: var(--color-accent);
   }
-  
+
   .btn-large {
     padding: 1rem 2.5rem;
     font-size: 1rem;
   }
-  
+
   /* ===== Header ===== */
   .header {
     position: fixed;
@@ -635,17 +644,17 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     border-bottom: 1px solid var(--color-border);
     transition: transform var(--transition);
   }
-  
+
   .header--hidden {
     transform: translateY(-100%);
   }
-  
+
   @media (prefers-reduced-motion: reduce) {
     .header {
       transition: none;
     }
   }
-  
+
   .nav {
     display: flex;
     align-items: center;
@@ -655,25 +664,25 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     margin-inline: auto;
     padding-inline: var(--space-md);
   }
-  
+
   .logo {
     display: flex;
     flex-direction: column;
     text-decoration: none;
     line-height: 1.1;
   }
-  
+
   .logo:hover {
     color: var(--color-text-primary);
   }
-  
+
   .logo-main {
     font-family: var(--font-serif);
     font-size: 1.25rem;
     font-weight: 600;
     letter-spacing: 0.05em;
   }
-  
+
   .logo-sub {
     font-family: var(--font-sans);
     font-size: 0.625rem;
@@ -682,18 +691,18 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     text-transform: uppercase;
     color: var(--color-text-secondary);
   }
-  
+
   .nav-links {
     display: none;
     gap: var(--space-lg);
   }
-  
+
   @media (min-width: 768px) {
     .nav-links {
       display: flex;
     }
   }
-  
+
   .nav-links a {
     font-size: 0.875rem;
     font-weight: 500;
@@ -701,16 +710,16 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     color: var(--color-text-secondary);
     transition: color var(--transition);
   }
-  
+
   .nav-links a:hover {
     color: var(--color-text-primary);
   }
-  
+
   .nav .btn-outline {
     padding: 0.625rem 1.25rem;
     font-size: 0.8125rem;
   }
-  
+
   /* ===== Hero ===== */
   .hero {
     position: relative;
@@ -719,19 +728,19 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     align-items: flex-end;
     padding: var(--space-3xl) var(--space-md) var(--space-2xl);
   }
-  
+
   .hero-bg {
     position: absolute;
     inset: 0;
     z-index: -1;
   }
-  
+
   .hero-bg img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  
+
   .hero-overlay {
     position: absolute;
     inset: 0;
@@ -741,11 +750,11 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
       rgba(14, 14, 14, 0.85) 100%
     );
   }
-  
+
   .hero-content {
     max-width: 800px;
   }
-  
+
   .hero-headline {
     font-family: var(--font-serif);
     font-size: clamp(3rem, 10vw, 6rem);
@@ -754,21 +763,21 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     line-height: 1;
     margin-bottom: var(--space-md);
   }
-  
+
   .hero-subhead {
     font-size: 1.125rem;
     color: var(--color-text-secondary);
     max-width: 50ch;
     margin-bottom: var(--space-lg);
   }
-  
+
   .hero-ctas {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--space-md);
   }
-  
+
   /* ===== Marquee ===== */
   .marquee {
     background: var(--color-surface);
@@ -777,23 +786,23 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
   }
-  
+
   .marquee-track {
     display: flex;
     width: max-content;
     animation: marquee 30s linear infinite;
   }
-  
+
   @media (prefers-reduced-motion: reduce) {
     .marquee-track {
       animation: none;
     }
   }
-  
+
   .marquee:hover .marquee-track {
     animation-play-state: paused;
   }
-  
+
   .marquee-content {
     font-size: 0.875rem;
     font-weight: 500;
@@ -801,33 +810,33 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     white-space: nowrap;
     padding-right: var(--space-lg);
   }
-  
+
   @keyframes marquee {
     to {
       transform: translateX(-25%);
     }
   }
-  
+
   /* ===== Sections ===== */
   .section {
     padding: var(--space-3xl) 0;
     scroll-margin-top: var(--header-height);
   }
-  
+
   .section--surface {
     background: var(--color-surface);
   }
-  
+
   .section-header {
     text-align: center;
     margin-bottom: var(--space-2xl);
     scroll-margin-top: var(--header-height);
   }
-  
+
   .section-header--left {
     text-align: left;
   }
-  
+
   /* ===== Fade Up Animation =====
      Disabled — was causing WAVE false-positive contrast errors
      (WAVE reads JS-driven opacity changes as transparent text) */
@@ -836,13 +845,13 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     opacity: 1;
     transform: none;
   }
-  
+
   /* ===== Services ===== */
   .services-list {
     max-width: 800px;
     margin-bottom: var(--space-xl);
   }
-  
+
   .service-item {
     display: grid;
     grid-template-columns: 1fr auto auto;
@@ -851,23 +860,23 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     padding: var(--space-md) 0;
     border-bottom: 1px solid var(--color-border);
   }
-  
+
   .service-info {
     min-width: 0;
   }
-  
+
   .service-name {
     font-family: var(--font-serif);
     font-size: 1.25rem;
     font-weight: 400;
     margin-bottom: 0.25rem;
   }
-  
+
   .service-desc {
     font-size: 0.875rem;
     color: var(--color-text-secondary);
   }
-  
+
   .service-line {
     flex: 1;
     min-width: 40px;
@@ -875,75 +884,75 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     align-self: center;
     display: none;
   }
-  
+
   @media (min-width: 600px) {
     .service-line {
       display: block;
     }
   }
-  
+
   .service-price {
     font-family: var(--font-serif);
     font-size: 1.125rem;
     font-weight: 600;
     white-space: nowrap;
   }
-  
+
   .services-note {
     font-size: 0.8125rem;
     color: var(--color-text-secondary);
     max-width: 500px;
   }
-  
+
   /* ===== Barbers ===== */
   .barbers-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-xl);
   }
-  
+
   @media (min-width: 600px) {
     .barbers-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
-  
+
   @media (min-width: 900px) {
     .barbers-grid {
       grid-template-columns: repeat(3, 1fr);
     }
   }
-  
+
   .barber-card {
     text-align: center;
   }
-  
+
   .barber-image {
     aspect-ratio: 1;
     margin-bottom: var(--space-md);
     overflow: hidden;
     background: var(--color-bg);
   }
-  
+
   .barber-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform var(--transition), filter var(--transition);
   }
-  
+
   .barber-card:hover .barber-image img {
     transform: scale(1.03);
     filter: brightness(1.05);
   }
-  
+
   .barber-name {
     font-family: var(--font-serif);
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 0.25rem;
   }
-  
+
   .barber-role {
     font-size: 0.75rem;
     font-weight: 600;
@@ -951,14 +960,14 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     color: var(--color-accent);
     margin-bottom: var(--space-sm);
   }
-  
+
   .barber-bio {
     font-size: 0.9375rem;
     color: var(--color-text-secondary);
     line-height: 1.6;
     margin-bottom: var(--space-md);
   }
-  
+
   .barber-book {
     font-size: 0.875rem;
     font-weight: 500;
@@ -966,47 +975,47 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     text-decoration: underline;
     text-underline-offset: 0.25em;
   }
-  
+
   /* ===== Gallery ===== */
   .gallery-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-sm);
   }
-  
+
   @media (min-width: 768px) {
     .gallery-grid {
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(3, 200px);
     }
-    
+
     .gallery-item--large {
       grid-column: 1;
       grid-row: 1 / 3;
     }
-    
+
     .gallery-item--wide {
       grid-column: 2 / 4;
     }
   }
-  
+
   .gallery-item {
     overflow: hidden;
     background: var(--color-surface);
   }
-  
+
   .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform var(--transition), filter var(--transition);
   }
-  
+
   .gallery-item:hover img {
     transform: scale(1.03);
     filter: brightness(1.1);
   }
-  
+
   /* ===== About ===== */
   .about-grid {
     display: grid;
@@ -1014,47 +1023,47 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     gap: var(--space-2xl);
     align-items: start;
   }
-  
+
   @media (min-width: 900px) {
     .about-grid {
       grid-template-columns: 1fr 1.2fr;
     }
   }
-  
+
   .about-image {
     aspect-ratio: 3 / 4;
     overflow: hidden;
     background: var(--color-bg);
   }
-  
+
   .about-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  
+
   .about-content .section-title {
     margin-bottom: var(--space-lg);
   }
-  
+
   .about-text {
     margin-bottom: var(--space-xl);
   }
-  
+
   .about-text p {
     color: var(--color-text-secondary);
     margin-bottom: var(--space-md);
   }
-  
+
   .about-text p:last-child {
     margin-bottom: 0;
   }
-  
+
   .about-quote {
     padding-left: var(--space-lg);
     border-left: 2px solid var(--color-accent);
   }
-  
+
   .about-quote p {
     font-family: var(--font-serif);
     font-size: 1.375rem;
@@ -1063,14 +1072,14 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     line-height: 1.4;
     margin-bottom: var(--space-sm);
   }
-  
+
   .about-quote cite {
     font-family: var(--font-sans);
     font-size: 0.875rem;
     font-style: normal;
     color: var(--color-text-secondary);
   }
-  
+
   /* ===== Visit ===== */
   .visit-grid {
     display: grid;
@@ -1078,60 +1087,60 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     gap: var(--space-xl);
     margin-bottom: var(--space-2xl);
   }
-  
+
   @media (min-width: 768px) {
     .visit-grid {
       grid-template-columns: 1fr 1.5fr;
     }
   }
-  
+
   .visit-address {
     font-style: normal;
     margin-bottom: var(--space-md);
   }
-  
+
   .visit-street {
     font-family: var(--font-serif);
     font-size: 1.25rem;
     margin-bottom: 0.25rem;
   }
-  
+
   .visit-contact {
     margin-bottom: var(--space-lg);
   }
-  
+
   .visit-link {
     display: block;
     font-size: 0.9375rem;
     margin-bottom: 0.5rem;
   }
-  
+
   .visit-hours {
     display: grid;
     gap: var(--space-xs);
   }
-  
+
   .hours-row {
     display: flex;
     justify-content: space-between;
     gap: var(--space-md);
     font-size: 0.9375rem;
   }
-  
+
   .hours-row dt {
     color: var(--color-text-secondary);
   }
-  
+
   .hours-row dd {
     font-weight: 500;
   }
-  
+
   .visit-map {
     min-height: 300px;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
   }
-  
+
   .map-placeholder {
     display: flex;
     flex-direction: column;
@@ -1142,64 +1151,64 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     color: var(--color-text-secondary);
     gap: var(--space-sm);
   }
-  
+
   .visit-cta {
     text-align: center;
   }
-  
+
   /* ===== Footer ===== */
   .footer {
     background: var(--color-surface);
     border-top: 1px solid var(--color-border);
     padding: var(--space-2xl) 0 var(--space-lg);
   }
-  
+
   .footer-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-xl);
     margin-bottom: var(--space-xl);
   }
-  
+
   @media (min-width: 768px) {
     .footer-grid {
       grid-template-columns: 1fr auto auto;
       align-items: start;
     }
   }
-  
+
   .footer-tagline {
     font-size: 0.875rem;
     color: var(--color-text-secondary);
     margin-top: var(--space-sm);
   }
-  
+
   .footer-nav ul {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-sm) var(--space-lg);
   }
-  
+
   .footer-nav a {
     font-size: 0.875rem;
     color: var(--color-text-secondary);
   }
-  
+
   .footer-social {
     display: flex;
     gap: var(--space-md);
   }
-  
+
   .social-link {
     color: var(--color-text-secondary);
     transition: color var(--transition);
     text-decoration: none;
   }
-  
+
   .social-link:hover {
     color: var(--color-accent);
   }
-  
+
   .footer-bottom {
     display: flex;
     flex-wrap: wrap;
@@ -1210,11 +1219,11 @@ const marqueeText = "Walk-ins welcome • Hot towel shaves • Beard sculpting �
     font-size: 0.8125rem;
     color: var(--color-text-secondary);
   }
-  
+
   .footer-credit a {
     color: var(--color-text-secondary);
   }
-  
+
   .footer-credit a:hover {
     color: var(--color-accent);
   }
